@@ -100,10 +100,12 @@ class DetailPage extends ConsumerWidget {
                               Navigator.pushReplacement(
                                 context,
                                 PageRouteBuilder(
-                                  pageBuilder: (context, a, b) => DetailPage(
-                                    recipeInfo: popularRecipeInfo,
-                                  ),
-                                ),
+                                    pageBuilder: (context, a, b) => DetailPage(
+                                          recipeInfo: popularRecipeInfo,
+                                        ),
+                                    transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+                                      return FadeTransition(opacity: animation, child: child);
+                                    }),
                               );
                             },
                             child: Card(
