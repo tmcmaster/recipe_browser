@@ -9,6 +9,8 @@ environment:
 
 flutter:
   uses-material-design: true
+  assets:
+    - images/plates
 
 dependencies:
   flutter:
