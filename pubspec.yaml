@@ -1,7 +1,7 @@
-name: flutter_package_template
+name: recipe_browser
 description: A new Flutter package project.
 version: 0.0.1
-homepage: https://github.com/tmcmaster/flutter_package_template/blob/main/README.md
+homepage: https://github.com/tmcmaster/recipe_browser/blob/main/README.md
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -13,6 +13,10 @@ flutter:
 dependencies:
   flutter:
     sdk: flutter
+  faker:
+  flutter_workbench:
+    git:
+      url: https://github.com/tmcmaster/flutter_workbench.git
 
 dev_dependencies:
   flutter_test:
@@ -20,7 +24,3 @@ dev_dependencies:
   pedantic:
   lint:
   test:
-  faker:
-  flutter_workbench:
-    git:
-      url: https://github.com/tmcmaster/flutter_workbench.git

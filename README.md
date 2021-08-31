@@ -1,2 +1,2 @@
-# flutter_package_template
+# recipe_browser
 This is a template for building new widgets
