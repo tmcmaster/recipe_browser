@@ -4,7 +4,7 @@ class RecipeInfo {
   final String subtitle;
   final String image;
   final String description;
-  final List<String> popular;
+  final List<int> popular;
 
   RecipeInfo(
     this.id, {

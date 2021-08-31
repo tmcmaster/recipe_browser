@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// TODO: need to switch to a different swiper, or fork and fix Null Safety
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:recipe_browser/pages/detail_page.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
 import '../data/data.dart';
 
@@ -12,6 +13,8 @@ class BrowsePage extends StatefulWidget {
 }
 
 class _BrowsePageState extends State<BrowsePage> {
+  static const CARD_SIZE = 300.0;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -82,7 +85,7 @@ class _BrowsePageState extends State<BrowsePage> {
                 padding: const EdgeInsets.only(left: 32),
                 child: Swiper(
                   itemCount: recipes.length,
-                  itemWidth: MediaQuery.of(context).size.width - 2 * 64,
+                  itemWidth: CARD_SIZE, //MediaQuery.of(context).size.width - 2 * 64,
                   layout: SwiperLayout.STACK,
                   pagination: SwiperPagination(
                     builder: DotSwiperPaginationBuilder(
@@ -179,7 +182,13 @@ class _BrowsePageState extends State<BrowsePage> {
                               child: SizedBox(
                                 height: 200,
                                 width: 200,
-                                child: Image.asset(recipes[index].image),
+                                child: SimpleShadow(
+                                  opacity: 0.4,
+                                  color: Colors.grey,
+                                  offset: Offset(5, 5),
+                                  child: Image.asset(recipes[index].image),
+                                ),
+                                // child: Image.asset(recipes[index].image),
                               ),
                             ),
                           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_browser/data/data.dart';
 import 'package:recipe_browser/models/recipe_info.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 
 class DetailPage extends StatelessWidget {
   final RecipeInfo recipeInfo;
@@ -90,19 +92,41 @@ class DetailPage extends StatelessWidget {
                         itemCount: recipeInfo.popular.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          return Card(
-                            clipBehavior: Clip.antiAlias,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: AspectRatio(
+                          final popularId = recipeInfo.popular[index];
+                          final popularRecipeInfo = recipes[popularId - 1];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, a, b) => DetailPage(
+                                    recipeInfo: popularRecipeInfo,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Card(
+                              clipBehavior: Clip.antiAlias,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: AspectRatio(
                                   aspectRatio: 1,
                                   child: Image.asset(
-                                    recipeInfo.popular[index],
+                                    popularRecipeInfo.image,
                                     fit: BoxFit.fitWidth,
-                                  )),
+                                  ),
+                                  // child: Hero(
+                                  //   tag: popularRecipeInfo.id,
+                                  //   child: Image.asset(
+                                  //     popularRecipeInfo.image,
+                                  //     fit: BoxFit.fitWidth,
+                                  //   ),
+                                  // ),
+                                ),
+                              ),
                             ),
                           );
                         }),
@@ -118,7 +142,12 @@ class DetailPage extends StatelessWidget {
                 child: SizedBox(
                   width: 200,
                   height: 200,
-                  child: Image.asset(recipeInfo.image),
+                  child: SimpleShadow(
+                    opacity: 0.4,
+                    color: Colors.grey,
+                    offset: Offset(5, 5),
+                    child: Image.asset(recipeInfo.image),
+                  ),
                 ),
               ),
             ),
