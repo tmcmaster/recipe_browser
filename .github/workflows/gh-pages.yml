@@ -30,7 +30,7 @@ jobs:
           channel: stable
 
       - run: flutter pub get
-      - run: flutter build web -t lib/main.dart
+      - run: flutter build web --no-sound-null-safety -t lib/main.dart
       - run: sed -i 's/base href="\/"/base href="\/recipe_browser\/"/g' build/web/index.html
 
       - name: deploy to pages
