@@ -42,7 +42,7 @@ class _RecipeBrowserState extends State<RecipeBrowser> {
               style: Theme.of(context).textTheme.headline4,
             ),
             Container(
-              child: Image.asset('images/plates/plate1.png'),
+              child: Image.asset('images/plates/plate3.png'),
             ),
           ],
         ),
