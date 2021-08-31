@@ -1,6 +1,7 @@
 library recipe_browser;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class RecipeBrowser extends StatefulWidget {
   RecipeBrowser({
@@ -39,6 +40,9 @@ class _RecipeBrowserState extends State<RecipeBrowser> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
+            ),
+            Container(
+              child: Image.asset('images/plates/plate1.png'),
             ),
           ],
         ),
