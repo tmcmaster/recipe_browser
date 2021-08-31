@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_browser/models/recipe_info.dart';
 
-import '../config/constants.dart';
-
 class DetailPage extends StatelessWidget {
   final RecipeInfo recipeInfo;
 
@@ -13,6 +11,12 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
+    final contentTextColor = colors.onSurface.withOpacity(0.7);
+    final primaryTextColor = colors.onSurface;
+
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -132,11 +136,14 @@ class DetailPage extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
-            IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+            Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
             ),
           ],
         ),

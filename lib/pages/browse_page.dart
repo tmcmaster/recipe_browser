@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:recipe_browser/pages/detail_page.dart';
 
-import '../config/constants.dart';
 import '../data/data.dart';
 
 class BrowsePage extends StatefulWidget {
@@ -15,15 +14,24 @@ class BrowsePage extends StatefulWidget {
 class _BrowsePageState extends State<BrowsePage> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+
+    final gradientStartColor = colors.primary;
+    final gradientEndColor = colors.secondary;
+    final primaryTextColor = colors.onPrimary;
+    final secondaryTextColor = colors.onPrimary;
+    final navigationColor = Colors.transparent; //colors.primaryVariant;
+
     return Scaffold(
       backgroundColor: gradientEndColor,
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [gradientStartColor, gradientEndColor],
+                colors: [gradientStartColor, colors.secondaryVariant, gradientEndColor],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: [0.3, 0.7])),
+                stops: [0.5, 0.8, 1])),
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +41,7 @@ class _BrowsePageState extends State<BrowsePage> {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      'Explore',
+                      'Recipes',
                       style: TextStyle(
                         fontFamily: 'Avenir',
                         fontSize: 44,
@@ -77,7 +85,12 @@ class _BrowsePageState extends State<BrowsePage> {
                   itemWidth: MediaQuery.of(context).size.width - 2 * 64,
                   layout: SwiperLayout.STACK,
                   pagination: SwiperPagination(
-                    builder: DotSwiperPaginationBuilder(activeSize: 20, space: 8),
+                    builder: DotSwiperPaginationBuilder(
+                      activeSize: 20,
+                      space: 8,
+                      color: colors.onSecondary,
+                      activeColor: colors.primary,
+                    ),
                   ),
                   itemBuilder: (context, index) {
                     return InkWell(
@@ -96,58 +109,64 @@ class _BrowsePageState extends State<BrowsePage> {
                           Column(
                             children: <Widget>[
                               SizedBox(height: 100),
-                              Card(
-                                elevation: 8,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(32),
-                                ),
-                                color: Colors.white,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(32.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      SizedBox(height: 100),
-                                      Text(
-                                        recipes[index].title,
-                                        style: TextStyle(
-                                          fontFamily: 'Avenir',
-                                          fontSize: 44,
-                                          color: const Color(0xff47455f),
-                                          fontWeight: FontWeight.w900,
+                              SizedBox(
+                                width: 300,
+                                height: 300,
+                                child: Card(
+                                  elevation: 8,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(32),
+                                  ),
+                                  color: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(32.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        SizedBox(height: 80),
+                                        Text(
+                                          recipes[index].title,
+                                          style: TextStyle(
+                                            fontFamily: 'Avenir',
+                                            fontSize: 44,
+                                            color: const Color(0xff47455f),
+                                            fontWeight: FontWeight.w900,
+                                          ),
+                                          textAlign: TextAlign.left,
                                         ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Text(
-                                        recipes[index].subtitle,
-                                        style: TextStyle(
-                                          fontFamily: 'Avenir',
-                                          fontSize: 23,
-                                          color: primaryTextColor,
-                                          fontWeight: FontWeight.w500,
+                                        Text(
+                                          recipes[index].subtitle,
+                                          style: TextStyle(
+                                            fontFamily: 'Avenir',
+                                            fontSize: 20,
+                                            color: Colors.grey.shade600,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          textAlign: TextAlign.left,
                                         ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      SizedBox(height: 32),
-                                      Row(
-                                        children: <Widget>[
-                                          Text(
-                                            'Know more',
-                                            style: TextStyle(
-                                              fontFamily: 'Avenir',
-                                              fontSize: 18,
-                                              color: secondaryTextColor,
-                                              fontWeight: FontWeight.w500,
+                                        Expanded(
+                                          child: SizedBox(height: 32),
+                                        ),
+                                        Row(
+                                          children: <Widget>[
+                                            Text(
+                                              'View Recipe',
+                                              style: TextStyle(
+                                                fontFamily: 'Avenir',
+                                                fontSize: 18,
+                                                color: colors.primary,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                              textAlign: TextAlign.left,
                                             ),
-                                            textAlign: TextAlign.left,
-                                          ),
-                                          Icon(
-                                            Icons.arrow_forward,
-                                            color: secondaryTextColor,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                            Icon(
+                                              Icons.arrow_forward,
+                                              color: colors.primary,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -200,15 +219,24 @@ class _BrowsePageState extends State<BrowsePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             IconButton(
-              icon: Image.asset('assets/menu_icon.png'),
+              icon: Icon(
+                Icons.menu,
+                color: colors.onSecondary,
+              ),
               onPressed: () {},
             ),
             IconButton(
-              icon: Image.asset('assets/search_icon.png'),
+              icon: Icon(
+                Icons.stop,
+                color: colors.onSecondary,
+              ),
               onPressed: () {},
             ),
             IconButton(
-              icon: Image.asset('assets/profile_icon.png'),
+              icon: Icon(
+                Icons.search,
+                color: colors.onSecondary,
+              ),
               onPressed: () {},
             ),
           ],
