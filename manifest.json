@@ -1,6 +1,6 @@
 {
-    "name": "flutter_package_template",
-    "short_name": "flutter_package_template",
+    "name": "recipe_browser",
+    "short_name": "recipe_browser",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
