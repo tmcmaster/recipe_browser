@@ -121,17 +121,17 @@ const RESOURCES = {
 "assets/images/plates/plate3.png": "21349ad8946191a306dbed6b5432bfec",
 "assets/images/plates/plate11.png": "8946533bb681cb0b98ce1a9cb010fcd3",
 "assets/images/plates/plate6.png": "ebc012c9d6dcb23025577ced9966fb02",
-"assets/images/plates/plate1.png": "739743ed975ca49bdec07da7516cc616",
-"assets/images/plates/plate2.png": "ed6e66fb9768d047f5cdbc2296d3f652",
+"assets/images/plates/plate1.png": "ed6e66fb9768d047f5cdbc2296d3f652",
+"assets/images/plates/plate2.png": "739743ed975ca49bdec07da7516cc616",
 "assets/images/plates/plate7.png": "19a3867ae5a1a47dee9dfea38b19e47d",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "manifest.json": "3dd42a429412d63534c20ae3b40b915a",
 "version.json": "2dcd754ec1a2dd32079245246128b487",
-"main.dart.js": "699eb981a09085b5ec8b7feb760f16e5",
-"index.html": "b7bd6f3a24ed38fa7b4471a16fb933b2",
-"/": "b7bd6f3a24ed38fa7b4471a16fb933b2"
+"main.dart.js": "04d39176e02b0181ad73ce054adb4ba7",
+"index.html": "8e2e142b5f370238747ed724180e95a3",
+"/": "8e2e142b5f370238747ed724180e95a3"
 };
 
 // The application shell files that are downloaded before a service worker can
