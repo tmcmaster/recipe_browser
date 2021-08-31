@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_browser/data/data.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipe_browser/models/recipe_info.dart';
+import 'package:recipe_browser/providers/recipes_provider.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends ConsumerWidget {
   final RecipeInfo recipeInfo;
 
   const DetailPage({
@@ -12,9 +13,9 @@ class DetailPage extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colors = theme.colorScheme;
+  Widget build(BuildContext context, ScopedReader watch) {
+    final recipes = watch(recipesProvider);
+    final colors = Theme.of(context).colorScheme;
 
     final contentTextColor = colors.onSurface.withOpacity(0.7);
     final primaryTextColor = colors.onSurface;
@@ -118,13 +119,6 @@ class DetailPage extends StatelessWidget {
                                     popularRecipeInfo.image,
                                     fit: BoxFit.fitWidth,
                                   ),
-                                  // child: Hero(
-                                  //   tag: popularRecipeInfo.id,
-                                  //   child: Image.asset(
-                                  //     popularRecipeInfo.image,
-                                  //     fit: BoxFit.fitWidth,
-                                  //   ),
-                                  // ),
                                 ),
                               ),
                             ),

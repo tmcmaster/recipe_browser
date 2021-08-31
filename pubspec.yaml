@@ -19,6 +19,7 @@ dependencies:
   faker:
   flutter_swiper: ^1.1.6
   simple_shadow:
+  flutter_riverpod:
   flutter_workbench:
     git:
       url: https://github.com/tmcmaster/flutter_workbench.git

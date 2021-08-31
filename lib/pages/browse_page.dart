@@ -1,37 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// TODO: need to switch to a different swiper, or fork and fix Null Safety
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:recipe_browser/pages/detail_page.dart';
+import 'package:recipe_browser/providers/recipes_provider.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
-import '../data/data.dart';
-
-class BrowsePage extends StatefulWidget {
-  @override
-  _BrowsePageState createState() => _BrowsePageState();
-}
-
-class _BrowsePageState extends State<BrowsePage> {
+class BrowsePage extends ConsumerWidget {
   static const CARD_SIZE = 300.0;
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colors = theme.colorScheme;
-
-    final gradientStartColor = colors.primary;
-    final gradientEndColor = colors.secondary;
-    final primaryTextColor = colors.onPrimary;
-    final secondaryTextColor = colors.onPrimary;
-    final navigationColor = Colors.transparent; //colors.primaryVariant;
+  Widget build(BuildContext context, ScopedReader watch) {
+    final recipes = watch(recipesProvider);
+    final colors = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: gradientEndColor,
+      backgroundColor: colors.secondary,
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [gradientStartColor, colors.secondaryVariant, gradientEndColor],
+                colors: [colors.primary, colors.secondaryVariant, colors.secondary],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 stops: [0.5, 0.8, 1])),
@@ -53,30 +42,6 @@ class _BrowsePageState extends State<BrowsePage> {
                       ),
                       textAlign: TextAlign.left,
                     ),
-
-                    /// TODO: need to look into why DropdownButton had issue
-                    // DropdownButton(
-                    //   items: [
-                    //     DropdownMenuItem(
-                    //       child: Text(
-                    //         'Solar System',
-                    //         style: TextStyle(
-                    //           fontFamily: 'Avenir',
-                    //           fontSize: 24,
-                    //           color: const Color(0x7cdbf1ff),
-                    //           fontWeight: FontWeight.w500,
-                    //         ),
-                    //         textAlign: TextAlign.left,
-                    //       ),
-                    //     ),
-                    //   ],
-                    //   onChanged: (value) {},
-                    //   icon: Padding(
-                    //     padding: const EdgeInsets.only(left: 16.0),
-                    //     child: Image.asset('assets/drop_down_icon.png'),
-                    //   ),
-                    //   underline: SizedBox(),
-                    // ),
                   ],
                 ),
               ),
@@ -85,7 +50,7 @@ class _BrowsePageState extends State<BrowsePage> {
                 padding: const EdgeInsets.only(left: 32),
                 child: Swiper(
                   itemCount: recipes.length,
-                  itemWidth: CARD_SIZE, //MediaQuery.of(context).size.width - 2 * 64,
+                  itemWidth: CARD_SIZE,
                   layout: SwiperLayout.STACK,
                   pagination: SwiperPagination(
                     builder: DotSwiperPaginationBuilder(
@@ -113,8 +78,8 @@ class _BrowsePageState extends State<BrowsePage> {
                             children: <Widget>[
                               SizedBox(height: 100),
                               SizedBox(
-                                width: 300,
-                                height: 300,
+                                width: CARD_SIZE,
+                                height: CARD_SIZE,
                                 child: Card(
                                   elevation: 8,
                                   shape: RoundedRectangleBorder(
@@ -129,9 +94,10 @@ class _BrowsePageState extends State<BrowsePage> {
                                         SizedBox(height: 80),
                                         Text(
                                           recipes[index].title,
+                                          overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontFamily: 'Avenir',
-                                            fontSize: 44,
+                                            fontSize: 40,
                                             color: const Color(0xff47455f),
                                             fontWeight: FontWeight.w900,
                                           ),
@@ -200,7 +166,7 @@ class _BrowsePageState extends State<BrowsePage> {
                               style: TextStyle(
                                 fontFamily: 'Avenir',
                                 fontSize: 200,
-                                color: primaryTextColor.withOpacity(0.08),
+                                color: colors.onPrimary.withOpacity(0.08),
                                 fontWeight: FontWeight.w900,
                               ),
                               textAlign: TextAlign.left,
@@ -221,7 +187,7 @@ class _BrowsePageState extends State<BrowsePage> {
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(36.0),
           ),
-          color: navigationColor,
+          color: Colors.transparent,
         ),
         padding: const EdgeInsets.all(24),
         child: Row(
