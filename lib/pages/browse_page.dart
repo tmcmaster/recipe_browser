@@ -100,7 +100,7 @@ class BrowsePage extends ConsumerWidget {
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontFamily: 'Avenir',
-                                            fontSize: 40,
+                                            fontSize: 28,
                                             color: const Color(0xff47455f),
                                             fontWeight: FontWeight.w900,
                                           ),
