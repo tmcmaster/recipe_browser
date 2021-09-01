@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// TODO: need to switch to a different swiper, or fork and fix Null Safety
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:recipe_browser/pages/detail_page.dart';
+import 'package:recipe_browser/pages/groceries_page.dart';
 import 'package:recipe_browser/providers/recipes_provider.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
@@ -200,10 +201,19 @@ class BrowsePage extends ConsumerWidget {
             ),
             IconButton(
               icon: Icon(
-                Icons.stop,
+                Icons.shopping_cart,
                 color: colors.onSecondary,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      pageBuilder: (context, a, b) => GroceriesPage(),
+                      transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+                        return FadeTransition(opacity: animation, child: child);
+                      }),
+                );
+              },
             ),
             IconButton(
               icon: Icon(

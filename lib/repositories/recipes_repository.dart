@@ -2,9 +2,9 @@ import 'package:faker/faker.dart';
 import 'package:recipe_browser/models/recipe_info.dart';
 import 'package:riverpod/riverpod.dart';
 
-final recipeServiceProvider = Provider((ref) => RecipeService());
+final recipesRepositoryProvider = Provider((ref) => RecipesRepository());
 
-class RecipeService {
+class RecipesRepository {
   static final NUM_OF_RECIPES = 12;
 
   List<RecipeInfo> getRecipeInfo() {
