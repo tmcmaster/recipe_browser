@@ -4,5 +4,15 @@ import 'package:riverpod/riverpod.dart';
 
 final recipesProvider = Provider<List<RecipeInfo>>((ref) {
   final recipeService = ref.watch(recipesRepositoryProvider);
-  return recipeService.getRecipeInfo();
+  return recipeService.getAllRecipes();
+});
+
+final pinnedRecipesProvider = Provider<List<RecipeInfo>>((ref) {
+  final recipeService = ref.watch(recipesRepositoryProvider);
+  return recipeService.getPinnedRecipes();
+});
+
+final favouriteRecipesProvider = Provider<List<RecipeInfo>>((ref) {
+  final recipeService = ref.watch(recipesRepositoryProvider);
+  return recipeService.getFavoriteRecipes();
 });

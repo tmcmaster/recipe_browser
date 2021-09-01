@@ -20,7 +20,18 @@ class RecipesRepository {
     'Chips & Dip',
     'Chips & Sauce',
   ];
-  List<RecipeInfo> getRecipeInfo() {
+
+  List<RecipeInfo> getPinnedRecipes() {
+    final recipes = getAllRecipes();
+    return [1, 4, 7].map((id) => recipes[id - 1]).toList();
+  }
+
+  List<RecipeInfo> getFavoriteRecipes() {
+    final recipes = getAllRecipes();
+    return [1, 4, 5, 6, 9, 12].map((id) => recipes[id - 1]).toList();
+  }
+
+  List<RecipeInfo> getAllRecipes() {
     final title = (id) => TITLES[id - 1];
     final subtitle = () => faker.lorem.words(3).join(' ');
     final description = () => faker.lorem.words(30).join(' ');

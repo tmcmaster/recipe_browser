@@ -7,10 +7,11 @@ import 'package:recipe_browser/providers/recipes_provider.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
 class DetailPage extends ConsumerWidget {
+  final String heroPrefix;
   final RecipeInfo recipeInfo;
-
   const DetailPage({
     Key? key,
+    required this.heroPrefix,
     required this.recipeInfo,
   }) : super(key: key);
 
@@ -49,15 +50,38 @@ class DetailPage extends ConsumerWidget {
                           textAlign: TextAlign.left,
                         ),
                         SizedBox(height: 10),
-                        Text(
-                          'Details',
-                          style: TextStyle(
-                            fontFamily: 'Avenir',
-                            fontSize: 31,
-                            color: primaryTextColor,
-                            fontWeight: FontWeight.w300,
-                          ),
-                          textAlign: TextAlign.left,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Details',
+                              style: TextStyle(
+                                fontFamily: 'Avenir',
+                                fontSize: 31,
+                                color: primaryTextColor,
+                                fontWeight: FontWeight.w300,
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.bookmark_border,
+                                    color: colors.primary,
+                                  ),
+                                  onPressed: () {},
+                                ),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.favorite_border,
+                                    color: colors.primary,
+                                  ),
+                                  onPressed: () {},
+                                )
+                              ],
+                            ),
+                          ],
                         ),
                         Divider(color: Colors.black38),
                         SizedBox(height: 32),
@@ -155,6 +179,7 @@ class DetailPage extends ConsumerWidget {
                                 context,
                                 PageRouteBuilder(
                                     pageBuilder: (context, a, b) => DetailPage(
+                                          heroPrefix: heroPrefix,
                                           recipeInfo: popularRecipeInfo,
                                         ),
                                     transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
@@ -188,7 +213,7 @@ class DetailPage extends ConsumerWidget {
               top: 30,
               right: 30,
               child: Hero(
-                tag: recipeInfo.id,
+                tag: '${heroPrefix}_${recipeInfo.id}',
                 child: SizedBox(
                   width: 200,
                   height: 200,
