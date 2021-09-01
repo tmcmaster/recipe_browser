@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipe_browser/models/recipe_info.dart';
+import 'package:recipe_browser/pages/groceries_page.dart';
+import 'package:recipe_browser/providers/groceries_provider.dart';
 import 'package:recipe_browser/providers/recipes_provider.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
@@ -17,13 +19,14 @@ class DetailPage extends ConsumerWidget {
     final recipes = watch(recipesProvider);
     final colors = Theme.of(context).colorScheme;
 
+    final groceriesNotifier = context.read(groceryItemsProvider.notifier);
+
     final contentTextColor = colors.onSurface.withOpacity(0.7);
     final primaryTextColor = colors.onSurface;
 
-    return Scaffold(
-      body: SafeArea(
-        bottom: false,
-        child: Stack(
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
           children: <Widget>[
             SingleChildScrollView(
               child: Column(
@@ -45,8 +48,9 @@ class DetailPage extends ConsumerWidget {
                           ),
                           textAlign: TextAlign.left,
                         ),
+                        SizedBox(height: 10),
                         Text(
-                          recipeInfo.subtitle,
+                          'Details',
                           style: TextStyle(
                             fontFamily: 'Avenir',
                             fontSize: 31,
@@ -66,6 +70,55 @@ class DetailPage extends ConsumerWidget {
                             fontSize: 20,
                             color: contentTextColor,
                             fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 32),
+                        //Divider(color: Colors.black38),
+                        //SizedBox(height: 20),
+                        Text(
+                          'Ingredients',
+                          style: TextStyle(
+                            fontFamily: 'Avenir',
+                            fontSize: 31,
+                            color: primaryTextColor,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        Divider(color: Colors.black38),
+                        SizedBox(height: 32),
+                        SizedBox(
+                          width: double.infinity,
+                          child: Column(
+                            children: [
+                              ...recipeInfo.ingredients.map((i) => Text(i)).toList(),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12.0),
+                                child: TextButton(
+                                  onPressed: () {
+                                    groceriesNotifier.addAll(recipeInfo.ingredients);
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                          pageBuilder: (context, a, b) => GroceriesPage(),
+                                          transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+                                            return FadeTransition(opacity: animation, child: child);
+                                          }),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Add to Grocery List',
+                                    style: TextStyle(
+                                      fontFamily: 'Avenir',
+                                      fontSize: 18,
+                                      color: colors.primary,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
                         SizedBox(height: 32),
@@ -97,6 +150,7 @@ class DetailPage extends ConsumerWidget {
                           final popularRecipeInfo = recipes[popularId - 1];
                           return GestureDetector(
                             onTap: () {
+                              groceriesNotifier.addAll(recipeInfo.ingredients);
                               Navigator.pushReplacement(
                                 context,
                                 PageRouteBuilder(

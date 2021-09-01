@@ -22,6 +22,18 @@ class GroceryListNotifier extends StateNotifier<List<GroceryItem>> {
     _repository.load().then((groceries) => state = groceries);
   }
 
+  void addAll(List<String> items) {
+    final newItems = items.map((title) => GroceryItem(
+          id: _uuid.v4(),
+          title: title,
+          quantity: '',
+          category: '',
+          done: false,
+        ));
+    state = [...state, ...newItems];
+    _repository.save(state);
+  }
+
   void add(String title) {
     final newItem = GroceryItem(
       id: _uuid.v4(),

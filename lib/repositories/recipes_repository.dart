@@ -12,6 +12,8 @@ class RecipesRepository {
     final subtitle = () => faker.lorem.words(3).join(' ');
     final description = () => faker.lorem.words(30).join(' ');
     final recipeId = () => faker.randomGenerator.integer(NUM_OF_RECIPES, min: 1);
+    final ingredient = () => faker.lorem.words(3).join(' ');
+    final ingredients = () => Iterable.generate(5).map((i) => ingredient()).toList();
 
     final popular =
         (id) => Iterable.generate(20).map((i) => recipeId()).where((i) => i != id).toSet().toList().sublist(0, 4);
@@ -24,6 +26,7 @@ class RecipesRepository {
               subtitle: subtitle(),
               image: 'images/plates/plate$i.png',
               description: description(),
+              ingredients: ingredients(),
               popular: popular(i),
             ))
         .toList();
