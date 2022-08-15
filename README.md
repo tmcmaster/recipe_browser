@@ -8,8 +8,8 @@ between pages.
 
 The Shopping list page was there to demonstrate buuilding a more complex component, integrating a 
 number of user interactions and features together.
-    - Switching into add mode for enter shopping items
-    - click an item to edit it
-    - drag an item to reorder the list
-    - swipe an item left and right to delete it
-    - tick when it is done (and untick it to mark it not done)
+- Switching into add mode for enter shopping items
+- click an item to edit it
+- drag an item to reorder the list
+- swipe an item left and right to delete it
+- tick when it is done (and untick it to mark it not done)
